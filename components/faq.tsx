@@ -1,48 +1,48 @@
 import {
-  BadgeDollarSign,
-  Route,
+  Search,
+  TrendingDown,
   ShieldCheck,
-  Truck,
-  Undo2,
-  UserRoundCheck,
+  Bell,
+  Zap,
+  HelpCircle,
 } from "lucide-react";
 
 const faq = [
   {
-    icon: Undo2,
-    question: "What is your return policy?",
+    icon: Search,
+    question: "¿Cómo funciona el comparador de precios?",
     answer:
-      "You can return unused items in their original packaging within 30 days for a refund or exchange. Contact support for assistance.",
+      "Simplemente pega la URL del producto de cualquier tienda compatible y nuestro sistema buscará automáticamente el mejor precio en todas las tiendas disponibles.",
   },
   {
-    icon: Route,
-    question: "How do I track my order?",
+    icon: TrendingDown,
+    question: "¿Qué tiendas están incluidas?",
     answer:
-      "Track your order using the link provided in your confirmation email, or log into your account to view tracking details.",
+      "Comparamos precios en Amazon, Carrefour, MediaMarkt, El Corte Inglés, Fnac, PcComponentes y muchas más. Añadimos nuevas tiendas regularmente.",
   },
   {
-    icon: Truck,
-    question: "Do you ship internationally?",
+    icon: Bell,
+    question: "¿Cómo funcionan las alertas de precio?",
     answer:
-      "Yes, we ship worldwide. Shipping fees and delivery times vary by location, and customs duties may apply for some countries.",
-  },
-  {
-    icon: BadgeDollarSign,
-    question: "What payment methods do you accept?",
-    answer:
-      "We accept Visa, MasterCard, American Express, PayPal, Apple Pay, and Google Pay, ensuring secure payment options for all customers.",
+      "Configura el precio objetivo para cualquier producto y te enviaremos un email cuando el precio baje a ese nivel o por debajo.",
   },
   {
     icon: ShieldCheck,
-    question: "What if I receive a damaged item?",
+    question: "¿Es seguro usar Comparaelprecio?",
     answer:
-      "Please contact our support team within 48 hours of delivery with photos of the damaged item. We’ll arrange a replacement or refund.",
+      "Completamente seguro. No almacenamos información personal sensible y todos los enlaces te llevan directamente a las tiendas oficiales.",
   },
   {
-    icon: UserRoundCheck,
-    question: "How can I contact customer support?",
+    icon: Zap,
+    question: "¿Qué incluye el análisis con IA?",
     answer:
-      "Reach out via email at support@example.com or call us at 1-800-123-4567 for assistance with any inquiries.",
+      "Nuestra IA analiza reseñas, características técnicas, histórico de precios y tendencias para darte una recomendación personalizada de compra.",
+  },
+  {
+    icon: HelpCircle,
+    question: "¿Puedo cancelar mi suscripción en cualquier momento?",
+    answer:
+      "Sí, puedes cancelar tu suscripción en cualquier momento desde tu panel de usuario. No hay compromisos ni penalizaciones.",
   },
 ];
 
@@ -54,22 +54,22 @@ const FAQ = () => {
     >
       <div className="max-w-screen-lg">
         <h2 className="text-3xl xs:text-4xl md:text-5xl !leading-[1.15] font-bold tracking-tight text-center">
-          Frequently Asked Questions
+          Preguntas Frecuentes
         </h2>
         <p className="mt-3 xs:text-lg text-center text-muted-foreground">
-          Quick answers to common questions about our products and services.
+          Resolvemos las dudas más comunes sobre nuestro comparador de precios.
         </p>
 
         <div className="mt-12 grid md:grid-cols-2 bg-background rounded-xl overflow-hidden outline outline-[1px] outline-border outline-offset-[-1px]">
           {faq.map(({ question, answer, icon: Icon }) => (
             <div key={question} className="border p-6 -mt-px -ml-px">
-              <div className="h-8 w-8 xs:h-10 xs:w-10 flex items-center justify-center rounded-full bg-accent">
-                <Icon className="h-4 w-4 xs:h-6 xs:w-6" />
+              <div className="h-8 w-8 xs:h-10 xs:w-10 flex items-center justify-center rounded-full bg-primary/10">
+                <Icon className="h-4 w-4 xs:h-6 xs:w-6 text-primary" />
               </div>
               <div className="mt-3 mb-2 flex items-start gap-2 text-lg xs:text-[1.35rem] font-semibold tracking-tight">
                 <span>{question}</span>
               </div>
-              <p className="text-sm xs:text-base">{answer}</p>
+              <p className="text-sm xs:text-base text-muted-foreground">{answer}</p>
             </div>
           ))}
         </div>

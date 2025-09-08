@@ -7,65 +7,65 @@ import React, { ComponentProps } from "react";
 const testimonials = [
   {
     id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
-    company: "TechCorp",
+    name: "María González",
+    designation: "Compradora habitual",
+    company: "Madrid",
     testimonial:
-      "This product has completely transformed the way we work. The efficiency and ease of use are unmatched!",
-    avatar: "https://randomuser.me/api/portraits/men/1.jpg",
+      "He ahorrado más de 200€ este año usando Comparaelprecio. Las alertas de precio son increíbles, nunca más pago de más.",
+    avatar: "https://randomuser.me/api/portraits/women/1.jpg",
   },
   {
     id: 2,
-    name: "Sophia Lee",
-    designation: "Data Analyst",
-    company: "InsightTech",
+    name: "Carlos Ruiz",
+    designation: "Entusiasta tecnología",
+    company: "Barcelona",
     testimonial:
-      "This tool has saved me hours of work! The analytics and reporting features are incredibly powerful.",
-    avatar: "https://randomuser.me/api/portraits/women/6.jpg",
+      "El análisis con IA me ayudó a elegir el mejor portátil. Comparó características y precios de forma muy detallada.",
+    avatar: "https://randomuser.me/api/portraits/men/2.jpg",
   },
   {
     id: 3,
-    name: "Michael Johnson",
-    designation: "UX Designer",
-    company: "DesignPro",
+    name: "Ana Martín",
+    designation: "Madre de familia",
+    company: "Valencia",
     testimonial:
-      "An amazing tool that simplifies complex tasks. Highly recommended for professionals in the industry.",
-    avatar: "https://randomuser.me/api/portraits/men/3.jpg",
+      "Perfecto para comparar precios de productos para niños. El histórico de precios me ayuda a saber cuándo comprar.",
+    avatar: "https://randomuser.me/api/portraits/women/3.jpg",
   },
   {
     id: 4,
-    name: "Emily Davis",
-    designation: "Marketing Specialist",
-    company: "BrandBoost",
+    name: "David López",
+    designation: "Freelancer",
+    company: "Sevilla",
     testimonial:
-      "I've seen a significant improvement in our team's productivity since we started using this service.",
-    avatar: "https://randomuser.me/api/portraits/women/4.jpg",
+      "Como trabajo desde casa, necesito encontrar las mejores ofertas en equipos. Esta herramienta es imprescindible.",
+    avatar: "https://randomuser.me/api/portraits/men/4.jpg",
   },
   {
     id: 5,
-    name: "Daniel Martinez",
-    designation: "Full-Stack Developer",
-    company: "CodeCrafters",
+    name: "Laura Sánchez",
+    designation: "Estudiante",
+    company: "Bilbao",
     testimonial:
-      "The best investment we've made! The support team is also super responsive and helpful.",
-    avatar: "https://randomuser.me/api/portraits/men/5.jpg",
+      "Con presupuesto limitado, cada euro cuenta. Las alertas me avisan cuando bajan los precios de los libros que necesito.",
+    avatar: "https://randomuser.me/api/portraits/women/5.jpg",
   },
   {
     id: 6,
-    name: "Jane Smith",
-    designation: "Product Manager",
-    company: "InnovateX",
+    name: "Miguel Torres",
+    designation: "Jubilado",
+    company: "Zaragoza",
     testimonial:
-      "The user experience is top-notch! The interface is clean, intuitive, and easy to navigate.",
-    avatar: "https://randomuser.me/api/portraits/women/2.jpg",
+      "Muy fácil de usar. Solo pego el enlace y me muestra todos los precios. He encontrado ofertas que no sabía que existían.",
+    avatar: "https://randomuser.me/api/portraits/men/6.jpg",
   },
 ];
 
 const Testimonials = () => (
-  <div id="testimonials" className="flex justify-center items-center py-20">
+  <div id="testimonios" className="flex justify-center items-center py-20">
     <div className="h-full w-full">
       <h2 className="mb-12 text-4xl md:text-5xl font-bold text-center tracking-tight px-6">
-        Testimonials
+        Lo que dicen nuestros usuarios
       </h2>
       <div className="relative">
         <div className="z-10 absolute left-0 inset-y-0 w-[15%] bg-gradient-to-r from-background to-transparent" />
@@ -97,6 +97,7 @@ const TestimonialList = () =>
           <div>
             <p className="text-lg font-semibold">{testimonial.name}</p>
             <p className="text-sm text-gray-500">{testimonial.designation}</p>
+            <p className="text-xs text-gray-400">{testimonial.company}</p>
           </div>
         </div>
         <Button variant="ghost" size="icon" asChild>

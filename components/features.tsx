@@ -1,66 +1,69 @@
 import {
-  Blocks,
-  Bot,
-  ChartPie,
-  Film,
-  MessageCircle,
-  Settings2,
+  TrendingDown,
+  Brain,
+  Bell,
+  ShoppingCart,
+  BarChart3,
+  Zap,
 } from "lucide-react";
 import React from "react";
 
 const features = [
   {
-    icon: Settings2,
-    title: "Customizable Layouts",
+    icon: TrendingDown,
+    title: "Histórico de Precios",
     description:
-      "Design your space with drag-and-drop simplicity—create grids, lists, or galleries in seconds.",
+      "Visualiza la evolución del precio durante los últimos 6 meses y descubre el mejor momento para comprar.",
   },
   {
-    icon: Blocks,
-    title: "Interactive Widgets",
+    icon: Brain,
+    title: "Análisis con IA",
     description:
-      "Embed polls, quizzes, or forms to keep your audience engaged.",
+      "Nuestra IA analiza reseñas, características y precios para darte una recomendación personalizada.",
   },
   {
-    icon: Bot,
-    title: "AI-Powered Tools",
+    icon: Bell,
+    title: "Alertas de Precio",
     description:
-      "Generate summaries, auto-format content, or translate into multiple languages seamlessly.",
+      "Recibe notificaciones cuando el precio baje al nivel que deseas. Nunca te pierdas una oferta.",
   },
   {
-    icon: Film,
-    title: "Media Integrations",
+    icon: ShoppingCart,
+    title: "Comparación Multi-tienda",
     description:
-      "Connect with Spotify, Instagram, or your own media library for dynamic visuals and sound.",
+      "Compara precios en Amazon, Carrefour, MediaMarkt, El Corte Inglés y muchas tiendas más.",
   },
   {
-    icon: ChartPie,
-    title: "Advanced Analytics",
+    icon: BarChart3,
+    title: "Estadísticas Avanzadas",
     description:
-      "Track engagement, clicks, and user activity with intuitive charts and reports.",
+      "Precio mínimo, máximo, promedio y tendencias para tomar la mejor decisión de compra.",
   },
   {
-    icon: MessageCircle,
-    title: "Seamless Collaboration",
+    icon: Zap,
+    title: "Búsqueda Instantánea",
     description:
-      "Comment, tag, and assign tasks directly within your documents.",
+      "Solo pega la URL del producto y obtén toda la información en segundos. Rápido y sencillo.",
   },
 ];
 
 const Features = () => {
   return (
-    <div id="features" className="w-full py-12 xs:py-20 px-6">
+    <div id="funcionalidades" className="w-full py-12 xs:py-20 px-6">
       <h2 className="text-3xl xs:text-4xl sm:text-5xl font-bold tracking-tight text-center">
-        Unleash Your Creativity
+        Todo lo que necesitas para ahorrar
       </h2>
+      <p className="mt-4 text-center text-muted-foreground max-w-2xl mx-auto">
+        Herramientas inteligentes para encontrar el mejor precio y tomar decisiones de compra informadas
+      </p>
       <div className="w-full max-w-screen-lg mx-auto mt-10 sm:mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {features.map((feature) => (
           <div
             key={feature.title}
-            className="flex flex-col bg-background border rounded-xl py-6 px-5"
+            className="flex flex-col bg-background border rounded-xl py-6 px-5 hover:shadow-lg transition-shadow"
           >
-            <div className="mb-3 h-10 w-10 flex items-center justify-center bg-muted rounded-full">
-              <feature.icon className="h-6 w-6" />
+            <div className="mb-3 h-10 w-10 flex items-center justify-center bg-primary/10 rounded-full">
+              <feature.icon className="h-6 w-6 text-primary" />
             </div>
             <span className="text-lg font-semibold">{feature.title}</span>
             <p className="mt-1 text-foreground/80 text-[15px]">

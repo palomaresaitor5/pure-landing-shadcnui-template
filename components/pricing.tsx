@@ -14,56 +14,57 @@ import { CircleCheck, CircleHelp } from "lucide-react";
 import { useState } from "react";
 
 const tooltipContent = {
-  styles: "Choose from a variety of styles to suit your preferences.",
-  filters: "Choose from a variety of filters to enhance your portraits.",
-  credits: "Use these credits to retouch your portraits.",
+  alertas: "Recibe notificaciones por email cuando baje el precio.",
+  historico: "Accede al histórico completo de precios de cualquier producto.",
+  analisis: "Análisis detallado con IA de productos y recomendaciones.",
 };
 
-const YEARLY_DISCOUNT = 20;
+const YEARLY_DISCOUNT = 30;
 const plans = [
   {
-    name: "Starter",
-    price: 20,
+    name: "Gratuito",
+    price: 0,
     description:
-      "Get 20 AI-generated portraits with 2 unique styles and filters.",
+      "Perfecto para uso ocasional. Compara precios básicos sin límites.",
     features: [
-      { title: "5 hours turnaround time" },
-      { title: "20 AI portraits" },
-      { title: "Choice of 2 styles", tooltip: tooltipContent.styles },
-      { title: "Choice of 2 filters", tooltip: tooltipContent.filters },
-      { title: "2 retouch credits", tooltip: tooltipContent.credits },
+      { title: "Comparación de precios ilimitada" },
+      { title: "Búsqueda en 5+ tiendas principales" },
+      { title: "Histórico básico (30 días)", tooltip: tooltipContent.historico },
+      { title: "Soporte por email" },
     ],
-    buttonText: "Get 20 portraits in 5 hours",
-  },
-  {
-    name: "Advanced",
-    price: 40,
-    isRecommended: true,
-    description:
-      "Get 50 AI-generated portraits with 5 unique styles and filters.",
-    features: [
-      { title: "3 hours turnaround time" },
-      { title: "50 AI portraits" },
-      { title: "Choice of 5 styles", tooltip: tooltipContent.styles },
-      { title: "Choice of 5 filters", tooltip: tooltipContent.filters },
-      { title: "5 retouch credits", tooltip: tooltipContent.credits },
-    ],
-    buttonText: "Get 50 portraits in 3 hours",
-    isPopular: true,
+    buttonText: "Empezar Gratis",
   },
   {
     name: "Premium",
-    price: 80,
+    price: 9,
+    isRecommended: true,
     description:
-      "Get 100 AI-generated portraits with 10 unique styles and filters.",
+      "Para compradores inteligentes que quieren ahorrar al máximo.",
     features: [
-      { title: "1-hour turnaround time" },
-      { title: "100 AI portraits" },
-      { title: "Choice of 10 styles", tooltip: tooltipContent.styles },
-      { title: "Choice of 10 filters", tooltip: tooltipContent.filters },
-      { title: "10 retouch credits", tooltip: tooltipContent.credits },
+      { title: "Todo lo del plan Gratuito" },
+      { title: "Histórico completo (6 meses)", tooltip: tooltipContent.historico },
+      { title: "Alertas de precio ilimitadas", tooltip: tooltipContent.alertas },
+      { title: "Análisis con IA", tooltip: tooltipContent.analisis },
+      { title: "Comparación en 15+ tiendas" },
+      { title: "Soporte prioritario" },
     ],
-    buttonText: "Get 100 portraits in 1 hour",
+    buttonText: "Comenzar Premium",
+    isPopular: true,
+  },
+  {
+    name: "Profesional",
+    price: 19,
+    description:
+      "Para empresas y usuarios avanzados que necesitan el máximo control.",
+    features: [
+      { title: "Todo lo del plan Premium" },
+      { title: "API de acceso a datos" },
+      { title: "Exportación de datos" },
+      { title: "Análisis de tendencias avanzado" },
+      { title: "Alertas personalizadas" },
+      { title: "Soporte telefónico" },
+    ],
+    buttonText: "Contactar Ventas",
   },
 ];
 
@@ -72,12 +73,15 @@ const Pricing = () => {
 
   return (
     <div
-      id="pricing"
+      id="precios"
       className="flex flex-col items-center justify-center py-12 xs:py-20 px-6"
     >
       <h1 className="text-3xl xs:text-4xl md:text-5xl font-bold text-center tracking-tight">
-        Pricing
+        Planes y Precios
       </h1>
+      <p className="mt-4 text-center text-muted-foreground max-w-2xl">
+        Elige el plan que mejor se adapte a tus necesidades de ahorro
+      </p>
       <Tabs
         value={selectedBillingPeriod}
         onValueChange={setSelectedBillingPeriod}
@@ -85,10 +89,10 @@ const Pricing = () => {
       >
         <TabsList className="h-11 px-1.5 rounded-full bg-primary/5">
           <TabsTrigger value="monthly" className="py-1.5 rounded-full">
-            Monthly
+            Mensual
           </TabsTrigger>
           <TabsTrigger value="yearly" className="py-1.5 rounded-full">
-            Yearly (Save {YEARLY_DISCOUNT}%)
+            Anual (Ahorra {YEARLY_DISCOUNT}%)
           </TabsTrigger>
         </TabsList>
       </Tabs>
@@ -102,18 +106,24 @@ const Pricing = () => {
           >
             {plan.isPopular && (
               <Badge className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2">
-                Most Popular
+                Más Popular
               </Badge>
             )}
             <h3 className="text-lg font-medium">{plan.name}</h3>
             <p className="mt-2 text-4xl font-bold">
-              $
-              {selectedBillingPeriod === "monthly"
-                ? plan.price
-                : plan.price * ((100 - YEARLY_DISCOUNT) / 100)}
-              <span className="ml-1.5 text-sm text-muted-foreground font-normal">
-                /month
-              </span>
+              {plan.price === 0 ? (
+                "Gratis"
+              ) : (
+                <>
+                  €
+                  {selectedBillingPeriod === "monthly"
+                    ? plan.price
+                    : Math.round(plan.price * ((100 - YEARLY_DISCOUNT) / 100))}
+                  <span className="ml-1.5 text-sm text-muted-foreground font-normal">
+                    /mes
+                  </span>
+                </>
+              )}
             </p>
             <p className="mt-4 font-medium text-muted-foreground">
               {plan.description}
