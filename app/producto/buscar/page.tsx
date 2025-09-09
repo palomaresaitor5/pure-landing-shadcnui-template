@@ -1,6 +1,7 @@
 import { getVerificador, getAmazon } from "@/lib/api";
 import { ProductView } from "@/components/product-view";
 import { notFound, redirect } from "next/navigation";
+import { Navbar } from "@/components/navbar";
 
 interface SearchPageProps {
   searchParams: {
@@ -30,30 +31,36 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     }
 
     return (
-      <div className="min-h-screen pt-24 pb-12">
-        <ProductView 
-          verificadorData={verificadorData}
-          amazonData={amazonData}
-        />
-      </div>
+      <>
+        <Navbar />
+        <div className="min-h-screen pt-24 pb-12">
+          <ProductView 
+            verificadorData={verificadorData}
+            amazonData={amazonData}
+          />
+        </div>
+      </>
     );
   } catch (error) {
     console.error("Error:", error);
     return (
-      <div className="min-h-screen pt-24 pb-12 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto px-6">
-          <h1 className="text-2xl font-bold text-red-600 mb-4">Error al procesar el producto</h1>
-          <p className="text-gray-600 mb-6">
-            No pudimos obtener información del producto. Verifica que la URL sea correcta y de una tienda compatible.
-          </p>
-          <a 
-            href="/" 
-            className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90"
-          >
-            Volver al inicio
-          </a>
+      <>
+        <Navbar />
+        <div className="min-h-screen pt-24 pb-12 flex items-center justify-center">
+          <div className="text-center max-w-md mx-auto px-6">
+            <h1 className="text-2xl font-bold text-red-600 mb-4">Error al procesar el producto</h1>
+            <p className="text-gray-600 mb-6">
+              No pudimos obtener información del producto. Verifica que la URL sea correcta y de una tienda compatible.
+            </p>
+            <a 
+              href="/" 
+              className="inline-flex items-center px-4 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90"
+            >
+              Volver al inicio
+            </a>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

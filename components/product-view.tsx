@@ -11,8 +11,11 @@ import {
   Brain, 
   ExternalLink,
   Star,
-  Calendar,
-  Euro
+  ShoppingCart,
+  Package,
+  Eye,
+  Heart,
+  Share2
 } from "lucide-react";
 import { VerificadorResponse, AmazonResponse, analyze, AnalysisResponse } from "@/lib/api";
 import { PriceChart } from "./price-chart";
@@ -49,17 +52,36 @@ export function ProductView({ verificadorData, amazonData }: ProductViewProps) {
     }).format(numPrice);
   };
 
+  const getPriceStats = () => {
+    if (!verificadorData.has_serie_historica || verificadorData.serie_historica.length === 0) {
+      return null;
+    }
+
+    const prices = verificadorData.serie_historica.map(item => item.precio);
+    const currentPrice = verificadorData.precios_destacados[0]?.precio;
+    const numCurrentPrice = currentPrice ? parseFloat(currentPrice.replace(/[€,]/g, '').replace(',', '.')) : 0;
+    
+    return {
+      current: numCurrentPrice,
+      min: Math.min(...prices),
+      max: Math.max(...prices),
+      avg: prices.reduce((a, b) => a + b, 0) / prices.length
+    };
+  };
+
+  const priceStats = getPriceStats();
+
   return (
     <div className="max-w-7xl mx-auto px-6">
       {/* Header del producto */}
       <div className="grid lg:grid-cols-2 gap-8 mb-8">
         {/* Imagen */}
-        <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden">
+        <div className="aspect-square bg-gray-50 rounded-xl overflow-hidden border">
           {verificadorData.imagen ? (
             <img
               src={verificadorData.imagen}
               alt={verificadorData.titulo || "Producto"}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain p-4"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -79,33 +101,61 @@ export function ProductView({ verificadorData, amazonData }: ProductViewProps) {
             </h1>
           </div>
 
-          {/* Precios destacados */}
-          {verificadorData.precios_destacados.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="text-lg font-semibold">Precios actuales</h3>
-              <div className="grid gap-3">
-                {verificadorData.precios_destacados.map((precio, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <span className="font-medium">{precio.tipo}</span>
-                    <div className="text-right">
-                      <div className="text-xl font-bold text-green-600">
-                        {precio.precio}
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {new Date(precio.fecha).toLocaleDateString("es-ES")}
-                      </div>
-                    </div>
+          {/* Estadísticas de precio */}
+          {priceStats && (
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Análisis de Precios</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="text-sm text-blue-600 font-medium">Precio Actual</div>
+                  <div className="text-2xl font-bold text-blue-900">
+                    {formatPrice(priceStats.current)}
                   </div>
-                ))}
+                </div>
+                <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                  <div className="text-sm text-green-600 font-medium">Precio Mínimo</div>
+                  <div className="text-2xl font-bold text-green-900">
+                    {formatPrice(priceStats.min)}
+                  </div>
+                </div>
+                <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+                  <div className="text-sm text-red-600 font-medium">Precio Máximo</div>
+                  <div className="text-2xl font-bold text-red-900">
+                    {formatPrice(priceStats.max)}
+                  </div>
+                </div>
+                <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                  <div className="text-sm text-gray-600 font-medium">Precio Medio (6 meses)</div>
+                  <div className="text-2xl font-bold text-gray-900">
+                    {formatPrice(priceStats.avg)}
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
           {/* Botones de acción */}
-          <div className="space-y-3">
-            <Button asChild className="w-full" size="lg">
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <Button asChild className="w-full" size="lg">
+                <a href={verificadorData.amazon_url || verificadorData.verificador_url} target="_blank" rel="noopener noreferrer">
+                  <ShoppingCart className="mr-2 h-4 w-4" />
+                  Comprar Ahora
+                </a>
+              </Button>
+              <Button asChild variant="outline" className="w-full" size="lg">
+                <a href={verificadorData.amazon_url || verificadorData.verificador_url} target="_blank" rel="noopener noreferrer">
+                  <Package className="mr-2 h-4 w-4" />
+                  Ver Stock
+                </a>
+              </Button>
+            </div>
+            
+            <Button asChild variant="outline" className="w-full" size="lg">
               <a href={verificadorData.amazon_url || verificadorData.verificador_url} target="_blank" rel="noopener noreferrer">
-                Ver en tienda <ExternalLink className="ml-2 h-4 w-4" />
+                <Eye className="mr-2 h-4 w-4" />
+                Ver en {verificadorData.tienda}
+                <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>
             
@@ -121,6 +171,17 @@ export function ProductView({ verificadorData, amazonData }: ProductViewProps) {
                 {isAnalyzing ? "Analizando..." : "Análisis con IA"}
               </Button>
             )}
+
+            <div className="flex gap-2">
+              <Button variant="ghost" size="sm" className="flex-1">
+                <Heart className="mr-2 h-4 w-4" />
+                Favoritos
+              </Button>
+              <Button variant="ghost" size="sm" className="flex-1">
+                <Share2 className="mr-2 h-4 w-4" />
+                Compartir
+              </Button>
+            </div>
           </div>
 
           {/* Información adicional de Amazon */}
