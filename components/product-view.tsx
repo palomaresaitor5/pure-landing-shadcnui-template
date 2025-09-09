@@ -104,7 +104,7 @@ export function ProductView({ verificadorData, amazonData }: ProductViewProps) {
           {/* Botones de acción */}
           <div className="space-y-3">
             <Button asChild className="w-full" size="lg">
-              <a href={verificadorData.verificador_url} target="_blank" rel="noopener noreferrer">
+              <a href={verificadorData.amazon_url || verificadorData.verificador_url} target="_blank" rel="noopener noreferrer">
                 Ver en tienda <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </Button>

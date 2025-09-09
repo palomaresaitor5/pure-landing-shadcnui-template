@@ -34,8 +34,10 @@ export default function CTABanner() {
           </p>
         </div>
         <div className="relative z-0 mt-14 flex flex-col sm:flex-row gap-4">
-          <Button size="lg">
-            Comparar Precios Ahora <Search className="!h-5 !w-5" />
+          <Button asChild size="lg">
+            <a href="/#buscar">
+              Comparar Precios Ahora <Search className="!h-5 !w-5" />
+            </a>
           </Button>
           <Button size="lg" variant="outline">
             Ver Demo <ArrowUpRight className="!h-5 !w-5" />

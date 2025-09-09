@@ -20,7 +20,9 @@ export const NavigationSheet = () => {
           <Button variant="outline" className="w-full sm:hidden">
             Iniciar Sesión
           </Button>
-          <Button className="w-full xs:hidden">Comparar Ahora</Button>
+          <Button asChild className="w-full xs:hidden">
+            <a href="/#buscar">Comparar Ahora</a>
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
